@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-08-06
+lastUpdated: 2026-08-10
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -447,6 +447,15 @@ The model picker opens in a **full-screen view** with inline reasoning effort ad
 
 **Auto mode and server-side model routing** (v1.0.43+): When you select **Auto** as your model, the CLI uses server-side model routing for real-time model selection. Instead of locking in a single model at session start, Auto mode evaluates each request and routes it to the most appropriate model dynamically. This means straightforward questions can be handled by a faster model while complex reasoning tasks are automatically escalated — without you needing to switch models manually.
 
+**Grouped model list** *(v1.0.79+)*: The model picker now organizes available models into **Recent**, **Recommended**, **New**, and other sections instead of a single flat list. Press **Shift+Tab** to cycle between grouping views, making it easier to find a model you've used recently or discover newly added ones without scrolling through the full catalog.
+
+**Session-scoped model selection** *(v1.0.78+)*: `/model` now changes the model for the **current session only** by default. To set the default model used for *future* sessions, use `/config model` instead:
+
+```
+/model              # change the model for this session only
+/config model        # set the default model for new sessions
+```
+
 **Model family aliases** (v1.0.64+): Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Recent models available include **Claude Opus 5** (v1.0.75+), the latest in Anthropic's Opus family for the most demanding tasks, and **Grok 4.5** (v1.0.76+) from xAI.
 
 **Plan mode model** *(v1.0.74+)*: When using plan mode (which blocks file mutations and keeps changes in a planning phase), you can assign a *separate* model specifically for planning — different from your regular session model. This lets you use a fast, cost-effective model for plan drafting while keeping a more capable model on standby for the implementation phase:
@@ -786,6 +795,14 @@ copilot --plan          # start in plan mode (propose without executing)
 
 This is useful in scripts or CI pipelines where you want the CLI to immediately begin working in a specific mode without an interactive prompt.
 
+**Combining plan and autopilot** *(v1.0.79+)*: Pass both `--plan` and `--mode autopilot` together to have the CLI draft a plan first and then implement it automatically, without pausing for approval between the planning and implementation phases:
+
+```bash
+copilot --plan --mode autopilot "Add pagination to the search results page"
+```
+
+This is useful for CI or batch automation where you want the safety of an explicit plan step but don't want a human to approve it before execution begins.
+
 The `--max-autopilot-continues` flag controls how many times Copilot can automatically continue in autopilot mode before pausing for confirmation. The default is 5:
 
 ```bash
@@ -806,6 +823,12 @@ These flags apply only to the current invocation — your persisted sandbox pref
 **`allowDevToolAccess` sandbox setting** *(v1.0.78+ as `allowDevToolCaches`, renamed to `allowDevToolAccess` in v1.0.79 — breaking change)*: When the sandbox is enabled, this setting grants sandboxed builds access to toolchain caches, registries, config files, and installs (npm cache, pip cache, Go module cache, etc.) so builds work without extra setup. Set it to `false` in `/settings` to opt out if you want a stricter sandbox that blocks all toolchain access.
 
 > **Breaking change (v1.0.79)**: The setting was renamed from `allowDevToolCaches` to `allowDevToolAccess`. If you previously set `allowDevToolCaches` to `false` to opt out, update your `settings.json` to use `allowDevToolAccess` — the old key is silently ignored.
+
+**Sandbox Auth tab and settings key rename** *(v1.0.79 — breaking change)*: The `/sandbox` configuration dialog now groups the `git`, `gh`, and (on macOS) keychain credential settings under a dedicated **Auth** tab. The underlying settings keys moved from `sandbox.gitAuth` / `sandbox.ghAuth` to `sandbox.auth.git` / `sandbox.auth.gh`. There is no automatic migration — the old keys are silently ignored in settings files, and SDK requests that still send them are rejected as invalid. Update any `settings.json` files or managed policies that reference the old keys.
+
+**`/sandbox policy`** *(v1.0.79+)*: Run `/sandbox policy` to show the effective sandbox configuration for the current session — including allowed/denied filesystem paths, network access rules, and any organization-managed restrictions layered on top of your personal settings. Use this to debug why a command was blocked or confirm what an enterprise-managed policy enforces.
+
+**`worktreeBaseRef` setting** *(v1.0.79+)*: Controls whether `/worktree`, `/worktree new`, and the `--worktree` startup flag branch from your current `HEAD` or from the remote default branch. All three now default to `HEAD`; previously `--worktree` defaulted to branching from the remote default branch. Set `worktreeBaseRef` in `/settings` if you want to restore the previous remote-default-branch behavior.
 
 The `--attachment` flag (available in prompt mode, `-p`) lets you attach files — images or native documents — to the initial prompt in non-interactive mode:
 

@@ -3,7 +3,7 @@ title: 'Installing and Using Plugins'
 description: 'Learn how to find, install, and manage plugins that extend GitHub Copilot CLI with reusable agents, skills, hooks, and integrations.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-08-04
+lastUpdated: 2026-08-11
 relatedArticles:
   - ./building-custom-agents.md
   - ./creating-effective-skills.md
@@ -294,6 +294,10 @@ copilot plugin install /path/to/openspec-plugin
 ```
 
 The CLI reads the manifest, discovers the bundled agents, skills, and MCP server configuration, and integrates them the same way it handles native Copilot plugins.
+
+### Bundling VS Code Extensions in Agent Plugins Spec Plugins
+
+*(v1.0.79+)* Plugins that follow the Agent Plugins spec can now ship IDE extensions alongside their agents and skills by placing them under a `com.github.copilot/extensions/` directory in the plugin package. This lets a single plugin install deliver both CLI-facing components (agents, skills, hooks) and a companion VS Code extension in one step, instead of requiring users to install the extension separately from the marketplace.
 
 ### `mcp.json` Configuration
 

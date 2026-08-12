@@ -3,7 +3,7 @@ title: 'Getting Started with the GitHub Copilot app'
 description: 'Learn about the GitHub Copilot app, a desktop experience built for agent-native development. Understand its key features and who it''s for.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-08-07
+lastUpdated: 2026-08-12
 estimatedReadingTime: '8 minutes'
 tags:
   - copilot-app
@@ -98,6 +98,19 @@ Agent Merge also understands **stacked pull requests**: it shows a stack summary
 ### Requesting Code Reviews
 
 From the app, you can request a Copilot code review on a pull request—and re-request a review even from reviewers who already responded—without leaving the session. This keeps the review loop inside the same workspace where the change was made.
+
+### Recent Additions
+
+The Copilot app is updated frequently. Recent additions include:
+
+- **Multi-tab chats**: Chats now support Files, Plan, and background task tabs alongside the conversation, with terminals and file mentions using the chat's actual working directory.
+- **Cross-repository issue creation**: Copilot can create GitHub issues in a different repository than the current session.
+- **Pull request stacks**: Navigate between related pull requests in a stack with a stack menu, plus a stack summary in the merge drawer.
+- **Commit attribution control**: A new **Commit attribution** setting lets you control whether agent-authored commits include a `Co-authored-by` trailer.
+- **Custom worktree location**: A **Worktree location** setting lets you customize where new session worktrees are created.
+- **Milestone editing**: View and edit the milestone on issues and pull requests directly in the app.
+- **Side chat**: Ask a question in a side chat during a session to explore options without derailing the original conversation.
+- **Background by default**: Closing the main window now keeps the app running in the background (with tray/dock support to reopen it) instead of quitting, so scheduled automations and sessions keep running.
 
 ## Who is the Copilot app for?
 

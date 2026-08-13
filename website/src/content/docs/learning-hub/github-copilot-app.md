@@ -3,7 +3,7 @@ title: 'Getting Started with the GitHub Copilot app'
 description: 'Learn about the GitHub Copilot app, a desktop experience built for agent-native development. Understand its key features and who it''s for.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-08-07
+lastUpdated: 2026-08-13
 estimatedReadingTime: '8 minutes'
 tags:
   - copilot-app
@@ -98,6 +98,18 @@ Agent Merge also understands **stacked pull requests**: it shows a stack summary
 ### Requesting Code Reviews
 
 From the app, you can request a Copilot code review on a pull request—and re-request a review even from reviewers who already responded—without leaving the session. This keeps the review loop inside the same workspace where the change was made.
+
+### Side Chat
+
+The `/side` slash command opens a **side chat**—a parallel conversation you can use to explore an idea, ask a clarifying question, or check something without interrupting or losing the context of your main conversation. Use it when you want to branch off a quick question mid-task and return to the main thread afterward.
+
+### Cross-Repository and Session Enhancements
+
+- **Cross-repository issue creation**: Copilot can create GitHub issues in a different repository than the one the current session is working in—useful when a fix belongs in a shared library or a separate tracking repo.
+- **Commit attribution setting**: A new **Commit attribution** setting in Settings lets you control whether agent-authored commits include a `Co-authored-by` trailer.
+- **Milestone editing**: View and edit the milestone on issues and pull requests directly in the app, without switching to GitHub.com.
+- **Resume from the sidebar**: A **Resume** button in the sidebar hover preview lets you resume an interrupted or errored session without fully opening it first.
+- **Worktree location setting**: A **Worktree location** setting in Settings > Sessions lets you customize where new worktrees are created, using a path template with repository, branch, and name placeholders.
 
 ## Who is the Copilot app for?
 

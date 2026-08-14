@@ -3,7 +3,7 @@ title: '02 · Context and Conversations'
 description: 'Learn how to give Copilot CLI richer context and build stronger multi-turn conversations.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-03-20
+lastUpdated: 2026-08-14
 ---
 
 ![Chapter 02: Context and Conversations](/images/learning-hub/copilot-cli-for-beginners/02/chapter-header.png)
@@ -352,6 +352,8 @@ Context usage: 45,000 / 128,000 tokens (35%)
 
 > 💡 **When to use `/clear`**: If you've been reviewing `books.py` and want to switch to discussing `utils.py`, run `/clear` first. Otherwise stale context from the old topic may confuse responses.
 
+> 💡 **Made a mistake or want to try a different approach?** Use `/rewind` (or press Esc twice) to open a **timeline picker** that lets you roll back to any earlier point in your conversation, not just the most recent one. When you rewind, Copilot CLI asks whether you want to restore only the conversation or also undo the file changes Copilot made — no git repository required. This is useful when you went down the wrong path and want to backtrack without starting over entirely.
+
 ---
 
 ### Pick Up Where You Left Off
@@ -567,6 +569,7 @@ copilot
 | Situation | Action | Why |
 |-----------|--------|-----|
 | Starting new topic | `/clear` | Removes irrelevant context |
+| Went down wrong path | `/rewind` | Roll back conversation (and optionally restore files) to any earlier point |
 | Long conversation | `/compact` | Summarizes history, frees tokens |
 | Need specific file | `@file.py` not `@folder/` | Loads only what you need |
 | Hitting limits | Start new session | Fresh 128K context |

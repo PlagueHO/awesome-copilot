@@ -3,7 +3,7 @@ title: 'Installing and Using Plugins'
 description: 'Learn how to find, install, and manage plugins that extend GitHub Copilot CLI with reusable agents, skills, hooks, and integrations.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-08-04
+lastUpdated: 2026-08-18
 relatedArticles:
   - ./building-custom-agents.md
   - ./creating-effective-skills.md
@@ -124,6 +124,10 @@ Because `awesome-copilot` is a default marketplace in VS Code, you can discover 
 - Open the **Extensions** search view and type **`@agentPlugins`** to see all available plugins
 - Or open the **Command Palette** (`Ctrl+Shift+P` / `Cmd+Shift+P`) and run **Chat: Plugins**
 
+### Browsing in the GitHub Copilot App
+
+The [GitHub Copilot app](../github-copilot-app/) includes a graphical plugin manager. Open **Customize → Plugins** to browse registered marketplaces, install plugins, and manage marketplace sources through the **Manage marketplaces** dialog — no CLI commands required.
+
 ### Adding More Marketplaces
 
 Register additional marketplaces from GitHub repositories:
@@ -154,6 +158,20 @@ To automatically register an additional marketplace for everyone working in a re
 ```
 
 With this in place, team members automatically get the `my-org-plugins` marketplace available without running a separate `marketplace add` command. This replaces the older `marketplaces` setting, which was removed in v1.0.16.
+
+*(v1.0.79+)* You can also set `"autoUpdate": true` on an `extraKnownMarketplaces` entry so its plugins update automatically at the start of each session, the same way official `copilot-plugins` marketplace plugins already do:
+
+```json
+{
+  "extraKnownMarketplaces": [
+    {
+      "name": "my-org-plugins",
+      "source": "my-org/internal-plugins",
+      "autoUpdate": true
+    }
+  ]
+}
+```
 
 ### Pinning a Marketplace to a Specific Commit
 
@@ -217,7 +235,9 @@ copilot plugin marketplace update
 copilot plugin uninstall my-plugin
 ```
 
-> **Auto-update for first-party plugins** *(v1.0.78+)*: Plugins sourced from the official `copilot-plugins` marketplace automatically update to their latest version at the start of each session. You do not need to run `copilot plugin update` for first-party plugins — updates are applied silently on startup. Community plugins from `awesome-copilot` and other marketplace registries still require a manual `copilot plugin update` command.
+> **Auto-update for first-party plugins** *(v1.0.78+)*: Plugins sourced from the official `copilot-plugins` marketplace automatically update to their latest version at the start of each session. You do not need to run `copilot plugin update` for first-party plugins — updates are applied silently on startup. Community plugins from `awesome-copilot` and other marketplace registries still require a manual `copilot plugin update` command, unless you opt a marketplace into `autoUpdate` (see [Sharing Marketplace Registrations Across a Team](#sharing-marketplace-registrations-across-a-team)).
+>
+> In the GitHub Copilot app, go to **Customize → Plugins** to update installed plugins and their extensions automatically, individually or all at once — no command line required.
 
 ### Enabling and Disabling Plugin Components
 

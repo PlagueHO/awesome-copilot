@@ -3,7 +3,7 @@ title: 'Installing and Using Plugins'
 description: 'Learn how to find, install, and manage plugins that extend GitHub Copilot CLI with reusable agents, skills, hooks, and integrations.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-08-04
+lastUpdated: 2026-08-19
 relatedArticles:
   - ./building-custom-agents.md
   - ./creating-effective-skills.md
@@ -177,6 +177,24 @@ Pinning to a SHA guarantees that everyone on the team installs plugins from exac
 - **Change control** — review and approve plugin updates before rolling them out team-wide
 - **Stability** — prevent breaking changes in upstream marketplaces from impacting your team without notice
 
+### Auto-Updating Plugins from a Marketplace
+
+*(v1.0.79+)* Set `"autoUpdate": true` on an `extraKnownMarketplaces` entry to have the CLI automatically update that marketplace's installed plugins at the start of each session, instead of requiring a manual `plugin update` command:
+
+```json
+{
+  "extraKnownMarketplaces": [
+    {
+      "name": "my-org-plugins",
+      "source": "my-org/internal-plugins",
+      "autoUpdate": true
+    }
+  ]
+}
+```
+
+Use `autoUpdate` when you want team members to always run the latest version of internal plugins without extra steps. Combine it with the `sha` field above only if you intentionally want reproducibility over freshness — the two settings serve opposite goals.
+
 ## Installing Plugins
 
 ### From Copilot CLI
@@ -300,6 +318,10 @@ The CLI reads the manifest, discovers the bundled agents, skills, and MCP server
 Open Plugin Spec v1 also standardizes how MCP server configuration is bundled in plugins. A plugin can now include an `mcp.json` file at its root to declare MCP servers it requires — using the same format as `.mcp.json` or `.github/mcp.json` in your repository. When you install such a plugin, its MCP server configuration is automatically merged into your active server list.
 
 This is useful for plugins that bundle dedicated tooling (for example, a database plugin that ships its own MCP server) — users get both the agent/skill and the required MCP server in a single install step.
+
+### Bundled Extensions in Agent Plugins Spec Plugins
+
+*(v1.0.79+)* Plugins that follow the [Agent Plugins specification](https://agent-plugins.org/) can ship reusable canvas extensions inside a `com.github.copilot/extensions/` directory, alongside their agents, skills, and hooks. This lets a single plugin bundle its own canvas extensions rather than requiring you to install them separately from a different source.
 
 ## Best Practices
 

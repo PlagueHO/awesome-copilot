@@ -3,7 +3,7 @@ title: 'Understanding Copilot Context'
 description: 'Learn how GitHub Copilot uses context from your code, workspace, and conversation to generate relevant suggestions.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2025-11-28
+lastUpdated: 2026-08-19
 estimatedReadingTime: '8 minutes'
 tags:
   - context
@@ -56,6 +56,8 @@ In GitHub Copilot Chat, conversation context includes all previous messages, que
 Workspace context includes project-level information like your directory structure, configuration files (`.gitignore`, `package.json`, `tsconfig.json`), and overall repository organization. This helps Copilot understand your project type, dependencies, and conventions.
 
 **Example**: If your workspace contains a `package.json` with TypeScript and React dependencies, Copilot recognizes this is a TypeScript React project and generates suggestions using appropriate patterns and types.
+
+**Faster search in large monorepos** *(Copilot CLI v1.0.79+)*: For large monorepos, the CLI automatically switches from `ripgrep` to [`tgrep`](https://github.com/microsoft/tgrep), a trigram-indexed grep that speeds up regex search across large codebases. This is transparent to you — it changes how quickly Copilot finds relevant context, not what context it considers.
 
 ## How Context Influences Suggestions
 

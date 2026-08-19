@@ -3,7 +3,7 @@ title: 'Agents and Subagents'
 description: 'Learn how delegated subagents differ from primary agents, when to use them, and how to launch them in VS Code and Copilot CLI.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-07-01
+lastUpdated: 2026-08-19
 estimatedReadingTime: '9 minutes'
 tags:
   - agents
@@ -64,6 +64,8 @@ If all of the work happens in one small file and does not need decomposition, a 
 ## Launch subagents in VS Code
 
 In VS Code, subagents are typically **agent-initiated**. You usually describe the larger task, and the main agent decides when to delegate a focused subtask. To make that possible, the agent needs access to the subagent tool.
+
+> **Agent host** *(VS Code 1.134+)*: VS Code's new agent host lets you connect to the **same** agent session from multiple VS Code windows, running the harness in a dedicated background process based on the [Agent Host Protocol](https://microsoft.github.io/agent-host-protocol/). The agent host's Copilot harness is powered by the [Copilot SDK](https://www.npmjs.com/package/@github/copilot-sdk), which aligns its behavior with the Copilot CLI, the standalone Copilot app, and other Copilot products. This is separate from subagent delegation within a single session, but it's useful for the same kind of parallel, multi-window workflows — see the [VS Code Agent Host docs](https://code.visualstudio.com/docs/agents/concepts/agent-host) for details.
 
 ### 1. Enable the agent tool
 

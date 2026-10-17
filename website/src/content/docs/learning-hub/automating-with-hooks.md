@@ -144,6 +144,10 @@ EOF
 
 When multiple IDE extensions (or a mix of extensions and a `hooks.json` file) each define hooks, all hook definitions are **merged** rather than the last one overwriting the others. This means you can layer hooks from different sources—a project's `.github/hooks/` file, an extension you have installed, and a personal settings file—and all of them will fire for the relevant events.
 
+### Agent-Scoped Hooks
+
+Custom agents can declare their own hooks, so guardrails apply only while that agent is running rather than to every session. Use this for agent-specific checks (for example, a review agent that blocks write tools) and keep repository-wide policy in `.github/hooks/`. See [Building Custom Agents](../building-custom-agents/) for agent file structure.
+
 ### Cross-Platform Event Name Compatibility
 
 Hook event names can be written in **camelCase** (e.g., `preToolUse`) or **PascalCase** (e.g., `PreToolUse`). Both are accepted, making hook configuration files compatible across GitHub Copilot CLI, VS Code, and Claude Code without modification. Hooks also support Claude Code's nested `matcher`/`hooks` structure alongside the standard flat format.

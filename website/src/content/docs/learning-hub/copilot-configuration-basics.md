@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-22
+lastUpdated: 2026-10-24
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -643,7 +643,7 @@ The `/share html` command exports the current session — including conversation
 /share html
 ```
 
-The exported file contains everything needed to view the session without a network connection and can be shared with teammates or stored for later reference. This complements `/share` (which shares via URL) for cases where an offline or attached format is preferred.
+The exported file contains everything needed to view the session without a network connection and can be shared with teammates or stored for later reference. This complements `/share` (which shares via URL) for cases where an offline or attached format is preferred. Running `/share` with no arguments opens a full-screen action menu for sharing the current session.
 
 The `/chronicle` command opens an interactive timeline of everything the agent has done in the current session. It shows file changes, tool calls, and conversation turns in chronological order, letting you review the full arc of the session at a glance:
 
@@ -828,6 +828,10 @@ copilot --no-sandbox -p "Set up development environment with system tools"
 ```
 
 These flags apply only to the current invocation — your persisted sandbox preference remains unchanged.
+
+The `--trust-folder` flag trusts the current folder for a one-off prompt-mode session started with `-p` or piped stdin, so automated runs don't stall on the folder trust prompt. The `--disable-client-telemetry` flag turns off client telemetry uploads for the session.
+
+The `assistedApprovalInstructions` setting lets you give Assisted Permissions custom guidance for confirmation decisions, for example which kinds of commands your team always wants to review.
 
 **`allowDevToolAccess` sandbox setting**: When the sandbox is enabled, this setting grants sandboxed builds access to toolchain caches, registries, config files, and installs (npm cache, pip cache, Go module cache, etc.) so builds work without extra setup. Set it to `false` in `/settings` to opt out if you want a stricter sandbox that blocks all toolchain access. See [Compatibility and Migration Notes](#compatibility-and-migration-notes) if you have an older `allowDevToolCaches` value configured.
 

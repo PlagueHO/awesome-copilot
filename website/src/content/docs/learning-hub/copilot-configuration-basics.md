@@ -831,7 +831,11 @@ These flags apply only to the current invocation — your persisted sandbox pref
 
 The `--trust-folder` flag trusts the current folder for a one-off prompt-mode session started with `-p` or piped stdin, so automated runs don't stall on the folder trust prompt. The `--disable-client-telemetry` flag turns off client telemetry uploads for the session.
 
-The `assistedApprovalInstructions` setting lets you give Assisted Permissions custom guidance for confirmation decisions, for example which kinds of commands your team always wants to review.
+The `assistedApprovalInstructions` setting lets you give Assisted Permissions custom guidance for confirmation decisions, for example which kinds of commands your team always wants to review. Assisted Permissions is available without enabling experimental mode.
+
+The `fusionTier` setting (also available through `copilot config`) controls which tier the managed **Fusion** model uses; Fusion sessions start on Auto and you can pick the High or Max tier from `/model`, including from long-context sessions.
+
+Run `/code` to open the current session in VS Code. In interactive and SDK Autopilot sessions, the agent keeps waiting for attached background tasks rather than stopping after `COPILOT_TASK_WAIT_TIMEOUT_SECONDS`; `-p --autopilot` runs still honor that timeout.
 
 **`allowDevToolAccess` sandbox setting**: When the sandbox is enabled, this setting grants sandboxed builds access to toolchain caches, registries, config files, and installs (npm cache, pip cache, Go module cache, etc.) so builds work without extra setup. Set it to `false` in `/settings` to opt out if you want a stricter sandbox that blocks all toolchain access. See [Compatibility and Migration Notes](#compatibility-and-migration-notes) if you have an older `allowDevToolCaches` value configured.
 

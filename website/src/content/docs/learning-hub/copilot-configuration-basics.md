@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-10-24
+lastUpdated: 2026-11-07
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -477,7 +477,9 @@ The `/settings` command opens an interactive dialog to browse and edit all user 
 /settings
 ```
 
-The settings dialog supports search — type to filter settings by name. Changes take effect immediately.
+`/settings` opens a unified dashboard for all users, with global search across settings and local resources — type to filter by name. Changes take effect immediately.
+
+The **Sandbox extensions** setting runs extension processes inside the sandbox. Set `COPILOT_SESSION_CWD` to control the working directory used when launching and expanding LSP and local MCP server configs.
 
 The `/settings` command and the `/model` command both support **`--repo` and `--local` flags** for explicitly scoping which layer of settings you want to view or edit:
 

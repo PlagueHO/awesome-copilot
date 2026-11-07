@@ -3,7 +3,7 @@ title: 'Installing and Using Plugins'
 description: 'Learn how to find, install, and manage plugins that extend GitHub Copilot CLI with reusable agents, skills, hooks, and integrations.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-22
+lastUpdated: 2026-11-07
 relatedArticles:
   - ./building-custom-agents.md
   - ./creating-effective-skills.md
@@ -213,6 +213,14 @@ Or from an interactive session:
 /plugin install database-data-management@awesome-copilot
 ```
 
+Verified skills and plugins can also be installed from a GitHub install link, which Copilot CLI accepts as a `ghapp://` URL:
+
+```bash
+copilot plugin install "ghapp://air/install?..."
+```
+
+Plugin marketplaces can point at a subdirectory of a Git repository using a `git-subdir` source, so a single repository can host a marketplace alongside other content.
+
 > **Deprecation notice**: Installing plugins directly from a GitHub repository URL, raw URL, or local file path (e.g., `copilot plugin install github/awesome-copilot`) is deprecated and will be removed in a future release. Use marketplace-based installation instead.
 
 ### From VS Code
@@ -235,6 +243,9 @@ copilot plugin marketplace update
 
 # Remove a plugin
 copilot plugin uninstall my-plugin
+
+# Remove a marketplace (refused while one of its plugins is enabled; add --force to also clear that plugin)
+copilot plugin marketplace remove my-marketplace --force
 ```
 
 > **Auto-update for first-party plugins**: Plugins sourced from the official `copilot-plugins` marketplace automatically update to their latest version at the start of each session. You do not need to run `copilot plugin update` for first-party plugins — updates are applied silently on startup. Community plugins from `awesome-copilot` and other marketplace registries still require a manual `copilot plugin update` command.
@@ -250,6 +261,8 @@ Run `/plugin` (or `copilot plugin list` in non-interactive mode) to see **enable
 ```
 
 This opens an interactive list where each installed plugin and its components are shown with a toggle. Disabling a component hides it from Copilot without removing it from disk — useful for temporarily deactivating a hook that is too noisy, or turning off a plugin's instructions when working on a different type of project. Re-enable the component at any time from the same `/plugin` menu.
+
+Plugin instruction rules that set `alwaysApply: false` stay out of the prompt until you enable them in `/instructions`.
 
 `/plugin` also flags installed plugins and marketplaces that have a newer version available upstream, and offers an **Update** action to pull the latest version directly from the dashboard.
 

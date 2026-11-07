@@ -845,6 +845,12 @@ Run `/code` to open the current session in VS Code. In interactive and SDK Autop
 
 **`worktreeBaseRef` setting**: Controls whether `/worktree`, `/worktree new`, and the `--worktree` startup flag create the new worktree from `HEAD` or from the remote default branch. All three default to `HEAD`. Set this in `/settings` if you want worktrees to branch from the remote default instead.
 
+**Windows enumerate-only grants**: Set `sandbox.userPolicy.filesystem.enumeratePaths` in `settings.json` to let sandboxed commands list the entries of specific directories on Windows without granting read access to their contents.
+
+**`/index` and shared tgrep indexing**: Use the `/index` commands to manage the code index behind `tgrep`. Managed shared indexing is enabled by default for eligible repositories.
+
+**Autopilot with Assisted Permissions**: Autopilot no longer stops for permission prompts. When an action isn't permitted, the agent tries another approach and reports what it couldn't do.
+
 **Sandbox network isolation**: On macOS and Linux, sandboxed commands cannot reach services running on your own machine, including a server the sandboxed command itself starts on `127.0.0.1`. This means test suites that bind a local port will fail inside the sandbox. Turn on **Allow local network** in `/sandbox` to restore access to localhost. On Linux, sandboxing also requires `slirp4netns`, `nsenter`, `iptables`, `ip6tables`, `iptables-restore`, and `ip6tables-restore` on `PATH` — install these if sandboxed commands start failing to launch. Additionally, Linux sandboxes restrict network egress to the configured HTTP(S) proxy when one is set; this proxy mode requires `slirp4netns`, `util-linux` 2.35+, `iptables`, and `/dev/net/tun` access.
 
 The `--attachment` flag (available in prompt mode, `-p`) lets you attach files — images or native documents — to the initial prompt in non-interactive mode:

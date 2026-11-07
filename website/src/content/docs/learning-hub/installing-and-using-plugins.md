@@ -262,6 +262,8 @@ This opens an interactive list where each installed plugin and its components ar
 
 Plugin instruction rules that set `alwaysApply: false` stay out of the prompt until you enable them in `/instructions`.
 
+Organizations can assign plugins through managed plugin assignments. An assignment with state `defaultEnabled` installs and activates the plugin by default, while your own overrides are preserved.
+
 `/plugin` also flags installed plugins and marketplaces that have a newer version available upstream, and offers an **Update** action to pull the latest version directly from the dashboard.
 
 The plugins dashboard (`/plugin`, `/mcp`, and `/skills`) is on for all users by default; `/skills`, bare `/mcp`, and `/mcp show` (with no server name) open the dashboard, and `/mcp config` opens the dedicated MCP wizard. See [Compatibility and Migration Notes](#compatibility-and-migration-notes) for the history of the retired `/plugins` command and its dashboard opt-out.

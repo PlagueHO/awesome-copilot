@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-11-07
+lastUpdated: 2026-11-11
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -942,7 +942,11 @@ Run `/config` to open a dedicated sidebar configuration screen inside the CLI, g
 
 ### Sandbox Network Allow/Deny Rules
 
-`/sandbox` supports per-host network allow/deny rules that layer on top of your configured upstream proxy, instead of replacing it. This lets you permit or block specific hosts for sandboxed commands without reconfiguring your whole proxy setup — useful when a sandboxed build or test needs to reach one extra domain (like a package registry mirror) while keeping the rest of your network policy intact.
+`/sandbox` supports per-host network allow/deny rules that layer on top of your configured upstream proxy, instead of replacing it. This lets you permit or block specific hosts for sandboxed commands without reconfiguring your whole proxy setup — useful when a sandboxed build or test needs to reach one extra domain (like a package registry mirror) while keeping the rest of your network policy intact. Host rules also accept IPv4 and IPv6 CIDR ranges (for example `10.0.0.0/8`), so you can allow or deny a whole subnet with one entry.
+
+### Guiding `/init`
+
+Text typed after `/init` is passed to the model as extra guidance for the generated instructions file, for example `/init focus on the build and test workflow`. Use `/init suppress` to skip generating the file.
 
 ### Memory and Session Import
 

@@ -3,7 +3,7 @@ title: 'Copilot Configuration Basics'
 description: 'Learn how to configure GitHub Copilot at user, workspace, and repository levels to optimize your AI-assisted development experience.'
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-09-22
+lastUpdated: 2026-11-11
 estimatedReadingTime: '10 minutes'
 tags:
   - configuration
@@ -455,7 +455,7 @@ The model picker opens in a **full-screen view** with inline reasoning effort ad
 
 **Auto mode and server-side model routing**: When you select **Auto** as your model, the CLI uses server-side model routing for real-time model selection. Instead of locking in a single model at session start, Auto mode evaluates each request and routes it to the most appropriate model dynamically. This means straightforward questions can be handled by a faster model while complex reasoning tasks are automatically escalated — without you needing to switch models manually.
 
-**Model family aliases**: Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Current models include **Claude Opus 5** and **Claude Fable 5.1** (Anthropic), **Grok 4.5** and **Grok 4.6** (xAI, with `xhigh` reasoning effort support), **Gemini 3.7 Flash** (Google), and **GPT-6 Astra** (OpenAI). The model picker also periodically retires older models no longer worth recommending, so don't be surprised if a model you previously pinned disappears from the list — check [Compatibility and Migration Notes](#compatibility-and-migration-notes) if that happens.
+**Model family aliases**: Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Current models include **Claude Opus 5** and **Claude Fable 5.1** and **Claude Fable 5.2** (Anthropic), **Grok 4.5** and **Grok 4.6** (xAI, with `xhigh` reasoning effort support), **Gemini 3.7 Flash** (Google), and **GPT-6 Astra** (OpenAI). The model picker also periodically retires older models no longer worth recommending, so don't be surprised if a model you previously pinned disappears from the list — check [Compatibility and Migration Notes](#compatibility-and-migration-notes) if that happens.
 
 **Model fallback lists**: Custom agents can set `model` to a list of several models instead of a single name. Copilot tries each one in order until it finds one available to your account — useful when your preferred model is temporarily rate-limited or not enrolled. Pair this with `model-policy: required` to keep the agent restricted to that list even if you try to switch models mid-session. See [Building Custom Agents](../building-custom-agents/) for the frontmatter syntax.
 
@@ -477,7 +477,9 @@ The `/settings` command opens an interactive dialog to browse and edit all user 
 /settings
 ```
 
-The settings dialog supports search — type to filter settings by name. Changes take effect immediately.
+`/settings` opens a unified dashboard for all users, with global search across settings and local resources — type to filter by name. Changes take effect immediately.
+
+The **Sandbox extensions** setting runs extension processes inside the sandbox. Set `COPILOT_SESSION_CWD` to control the working directory used when launching and expanding LSP and local MCP server configs.
 
 The `/settings` command and the `/model` command both support **`--repo` and `--local` flags** for explicitly scoping which layer of settings you want to view or edit:
 
@@ -524,6 +526,8 @@ The `/session delete` command removes sessions you no longer need:
 ```
 
 You can also press **x** on a highlighted session in the session picker (`--resume`) to delete it directly from the list.
+
+`/session prune` (and its dry run) skips sessions that are open in other processes and reports how many were skipped. Unnamed sessions show their short ID in the Sessions tab and `/resume` list, and keep that label after resuming.
 
 In the session picker, press **`s`** to cycle the sort order: relevance, last used, created, or name. The picker also shows the branch name and idle/in-use status for each session.
 
@@ -643,7 +647,7 @@ The `/share html` command exports the current session — including conversation
 /share html
 ```
 
-The exported file contains everything needed to view the session without a network connection and can be shared with teammates or stored for later reference. This complements `/share` (which shares via URL) for cases where an offline or attached format is preferred.
+The exported file contains everything needed to view the session without a network connection and can be shared with teammates or stored for later reference. This complements `/share` (which shares via URL) for cases where an offline or attached format is preferred. Running `/share` with no arguments opens a full-screen action menu for sharing the current session.
 
 The `/chronicle` command opens an interactive timeline of everything the agent has done in the current session. It shows file changes, tool calls, and conversation turns in chronological order, letting you review the full arc of the session at a glance:
 
@@ -829,11 +833,25 @@ copilot --no-sandbox -p "Set up development environment with system tools"
 
 These flags apply only to the current invocation — your persisted sandbox preference remains unchanged.
 
+The `--trust-folder` flag trusts the current folder for a one-off prompt-mode session started with `-p` or piped stdin, so automated runs don't stall on the folder trust prompt. The `--disable-client-telemetry` flag turns off client telemetry uploads for the session.
+
+The `assistedApprovalInstructions` setting lets you give Assisted Permissions custom guidance for confirmation decisions, for example which kinds of commands your team always wants to review. Assisted Permissions is available without enabling experimental mode.
+
+The `fusionTier` setting (also available through `copilot config`) controls which tier the managed **Fusion** model uses; Fusion sessions start on Auto and you can pick the High or Max tier from `/model`, including from long-context sessions.
+
+Run `/code` to open the current session in VS Code. In interactive and SDK Autopilot sessions, the agent keeps waiting for attached background tasks rather than stopping after `COPILOT_TASK_WAIT_TIMEOUT_SECONDS`; `-p --autopilot` runs still honor that timeout.
+
 **`allowDevToolAccess` sandbox setting**: When the sandbox is enabled, this setting grants sandboxed builds access to toolchain caches, registries, config files, and installs (npm cache, pip cache, Go module cache, etc.) so builds work without extra setup. Set it to `false` in `/settings` to opt out if you want a stricter sandbox that blocks all toolchain access. See [Compatibility and Migration Notes](#compatibility-and-migration-notes) if you have an older `allowDevToolCaches` value configured.
 
 **Sandbox auth settings**: The `/sandbox` configuration dialog groups git, `gh`, and (on macOS) keychain settings under an **Auth** tab, backed by the `sandbox.auth.git` and `sandbox.auth.gh` settings keys. See [Compatibility and Migration Notes](#compatibility-and-migration-notes) if you have the older `sandbox.gitAuth`/`sandbox.ghAuth` keys configured.
 
 **`worktreeBaseRef` setting**: Controls whether `/worktree`, `/worktree new`, and the `--worktree` startup flag create the new worktree from `HEAD` or from the remote default branch. All three default to `HEAD`. Set this in `/settings` if you want worktrees to branch from the remote default instead.
+
+**Windows enumerate-only grants**: Set `sandbox.userPolicy.filesystem.enumeratePaths` in `settings.json` to let sandboxed commands list the entries of specific directories on Windows without granting read access to their contents.
+
+**`/index` and shared tgrep indexing**: Use the `/index` commands to manage the code index behind `tgrep`. Managed shared indexing is enabled by default for eligible repositories.
+
+**Autopilot with Assisted Permissions**: Autopilot no longer stops for permission prompts. When an action isn't permitted, the agent tries another approach and reports what it couldn't do.
 
 **Sandbox network isolation**: On macOS and Linux, sandboxed commands cannot reach services running on your own machine, including a server the sandboxed command itself starts on `127.0.0.1`. This means test suites that bind a local port will fail inside the sandbox. Turn on **Allow local network** in `/sandbox` to restore access to localhost. On Linux, sandboxing also requires `slirp4netns`, `nsenter`, `iptables`, `ip6tables`, `iptables-restore`, and `ip6tables-restore` on `PATH` — install these if sandboxed commands start failing to launch. Additionally, Linux sandboxes restrict network egress to the configured HTTP(S) proxy when one is set; this proxy mode requires `slirp4netns`, `util-linux` 2.35+, `iptables`, and `/dev/net/tun` access.
 
@@ -933,7 +951,11 @@ Run `/config` to open a dedicated sidebar configuration screen inside the CLI, g
 
 ### Sandbox Network Allow/Deny Rules
 
-`/sandbox` supports per-host network allow/deny rules that layer on top of your configured upstream proxy, instead of replacing it. This lets you permit or block specific hosts for sandboxed commands without reconfiguring your whole proxy setup — useful when a sandboxed build or test needs to reach one extra domain (like a package registry mirror) while keeping the rest of your network policy intact.
+`/sandbox` supports per-host network allow/deny rules that layer on top of your configured upstream proxy, instead of replacing it. This lets you permit or block specific hosts for sandboxed commands without reconfiguring your whole proxy setup — useful when a sandboxed build or test needs to reach one extra domain (like a package registry mirror) while keeping the rest of your network policy intact. Host rules also accept IPv4 and IPv6 CIDR ranges (for example `10.0.0.0/8`), so you can allow or deny a whole subnet with one entry.
+
+### Guiding `/init`
+
+Text typed after `/init` is passed to the model as extra guidance for the generated instructions file, for example `/init focus on the build and test workflow`. Use `/init suppress` to skip generating the file.
 
 ### Sandbox Session Control
 

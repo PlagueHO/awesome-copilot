@@ -455,7 +455,7 @@ The model picker opens in a **full-screen view** with inline reasoning effort ad
 
 **Auto mode and server-side model routing**: When you select **Auto** as your model, the CLI uses server-side model routing for real-time model selection. Instead of locking in a single model at session start, Auto mode evaluates each request and routes it to the most appropriate model dynamically. This means straightforward questions can be handled by a faster model while complex reasoning tasks are automatically escalated — without you needing to switch models manually.
 
-**Model family aliases**: Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Current models include **Claude Opus 5** and **Claude Fable 5.1** (Anthropic), **Grok 4.5** and **Grok 4.6** (xAI, with `xhigh` reasoning effort support), **Gemini 3.7 Flash** (Google), and **GPT-6 Astra** (OpenAI). The model picker also periodically retires older models no longer worth recommending, so don't be surprised if a model you previously pinned disappears from the list — check [Compatibility and Migration Notes](#compatibility-and-migration-notes) if that happens.
+**Model family aliases**: Instead of typing a full model name, you can use short family aliases in the model setting: `opus`, `sonnet`, `haiku` (Anthropic), and `gpt`, `gemini` (Google/OpenAI). The CLI resolves the alias to the latest available model in that family. This is especially useful in scripts or configuration files where you want to track the best model in a family without hardcoding a version string. Current models include **Claude Opus 5** and **Claude Fable 5.1** and **Claude Fable 5.2** (Anthropic), **Grok 4.5** and **Grok 4.6** (xAI, with `xhigh` reasoning effort support), **Gemini 3.7 Flash** (Google), and **GPT-6 Astra** (OpenAI). The model picker also periodically retires older models no longer worth recommending, so don't be surprised if a model you previously pinned disappears from the list — check [Compatibility and Migration Notes](#compatibility-and-migration-notes) if that happens.
 
 **Model fallback lists**: Custom agents can set `model` to a list of several models instead of a single name. Copilot tries each one in order until it finds one available to your account — useful when your preferred model is temporarily rate-limited or not enrolled. Pair this with `model-policy: required` to keep the agent restricted to that list even if you try to switch models mid-session. See [Building Custom Agents](../building-custom-agents/) for the frontmatter syntax.
 
@@ -526,6 +526,8 @@ The `/session delete` command removes sessions you no longer need:
 ```
 
 You can also press **x** on a highlighted session in the session picker (`--resume`) to delete it directly from the list.
+
+`/session prune` (and its dry run) skips sessions that are open in other processes and reports how many were skipped. Unnamed sessions show their short ID in the Sessions tab and `/resume` list, and keep that label after resuming.
 
 In the session picker, press **`s`** to cycle the sort order: relevance, last used, created, or name. The picker also shows the branch name and idle/in-use status for each session.
 

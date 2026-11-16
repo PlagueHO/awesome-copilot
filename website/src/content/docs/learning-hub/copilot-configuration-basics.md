@@ -849,6 +849,10 @@ Run `/code` to open the current session in VS Code. In interactive and SDK Autop
 
 **Windows enumerate-only grants**: Set `sandbox.userPolicy.filesystem.enumeratePaths` in `settings.json` to let sandboxed commands list the entries of specific directories on Windows without granting read access to their contents.
 
+**Remote session creation**: Launch a CLI host with `--host-allow-session-creation` to let remote clients create sessions on it for that launch only, without changing your saved settings.
+
+**Regex permission rules**: Enterprise-managed Shell, Bash, and PowerShell permission rules can use regular expressions to match commands.
+
 **`/index` and shared tgrep indexing**: Use the `/index` commands to manage the code index behind `tgrep`. Managed shared indexing is enabled by default for eligible repositories.
 
 **Autopilot with Assisted Permissions**: Autopilot no longer stops for permission prompts. When an action isn't permitted, the agent tries another approach and reports what it couldn't do.

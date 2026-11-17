@@ -923,6 +923,8 @@ copilot --trust-folder -p "Summarize this repo"   # trust the folder for a one-o
 copilot --disable-client-telemetry                # turn off client telemetry uploads
 ```
 
+To cap spend on a run, set `--max-ai-credits`. The limit applies to the whole session, including subagents, and AI credits used before a resumed session count toward it.
+
 ### The `/config` Sidebar
 
 Run `/config` to open a dedicated sidebar configuration screen inside the CLI, giving you a browsable view of your active settings without leaving the terminal session or hand-editing `config.json`:

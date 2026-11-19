@@ -66,6 +66,15 @@ const workshopRedirects = Object.fromEntries(
   }),
 );
 
+// The First steps app review lesson moved from 12 to 13. Localized pages still
+// serve the old page, so only the English route redirects until they are synced.
+const firstStepsAppRedirects = Object.fromEntries(
+  [""].map((locale) => {
+    const prefix = `/${locale ? `${locale}/` : ""}learning-hub/copilot-workshops/first-steps/copilot-app/`;
+    return [`${prefix}12-review/`, `${prefix}13-review/`];
+  }),
+);
+
 // https://astro.build/config
 export default defineConfig({
   site,
@@ -109,6 +118,7 @@ export default defineConfig({
   integrations: [react(), sitemap(), pagefindResources()],
   redirects: {
     ...workshopRedirects,
+    ...firstStepsAppRedirects,
     "/samples/": "/learning-hub/cookbook/",
     "/hooks/": "https://github.com/github/awesome-copilot/tree/main/hooks",
     "/workflows/": "https://github.com/github/awesome-copilot/tree/main/workflows",

@@ -1,15 +1,15 @@
 ---
 title: "Build and deploy the agent"
 description: "Scaffold the Backer Concierge in Canvas, inspect it locally, and deploy and retest it in Foundry."
-authors:
-  - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-10-05
 prev:
-  link: /learning-hub/copilot-workshops/app/8-foundry-canvas/1-project-and-model/
+  link: /copilot-workshops/real-world-development/app/8-foundry-canvas/1-project-and-model/
   label: Prepare project and model
 next:
-  link: /learning-hub/copilot-workshops/app/8-foundry-canvas/3-connect-to-site/
+  link: /copilot-workshops/real-world-development/app/8-foundry-canvas/3-connect-to-site/
   label: Connect the agent to the site
+authors:
+  - GitHub Copilot Learning Hub Team
+lastUpdated: 2026-11-19
 ---
 
 This module turns the project, model deployment, and catalog from [Prepare project and model][previous-module] into a hosted Backer Concierge through Microsoft Foundry Canvas.

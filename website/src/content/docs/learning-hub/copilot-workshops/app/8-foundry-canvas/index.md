@@ -1,15 +1,15 @@
 ---
 title: "Optional: Incorporate Foundry"
 description: "Build a catalog-grounded Backer Concierge with Microsoft Foundry Canvas, with safe stopping points along the way."
-authors:
-  - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-10-05
-prev: { link: /learning-hub/copilot-workshops/app/10-review/, label: Review and next steps }
+prev: { link: /copilot-workshops/real-world-development/app/10-review/, label: Review and next steps }
 next:
-  link: /learning-hub/copilot-workshops/app/8-foundry-canvas/1-project-and-model/
+  link: /copilot-workshops/real-world-development/app/8-foundry-canvas/1-project-and-model/
   label: Prepare project and model
 tags:
   - workshop
+authors:
+  - GitHub Copilot Learning Hub Team
+lastUpdated: 2026-11-19
 ---
 
 This optional journey adds a **Backer Concierge** to Tailspin Toys using Microsoft Foundry Canvas in the GitHub Copilot app. It moves from a catalog-grounded model experiment to a hosted agent and then a local website integration.

@@ -1,11 +1,11 @@
 ---
 title: "First Steps with GitHub Copilot in Visual Studio Code"
 description: "Take a guided tour of GitHub Copilot in Visual Studio Code by building, testing, and shipping a Space Quiz."
-authors:
-  - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-10-08
 tags:
   - workshop
+authors:
+  - GitHub Copilot Learning Hub Team
+lastUpdated: 2026-11-19
 ---
 
 Take a beginner-friendly, hands-on tour of GitHub Copilot in Visual Studio Code. You will build a colorful Space Quiz from an empty folder and learn the editor loop: build in a workspace, inspect context, test before Git writes anything, plan before you edit, and let GitHub tools handle issues and pull requests without leaving VS Code.

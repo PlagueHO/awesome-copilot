@@ -1,11 +1,11 @@
 ---
 title: "First Steps with GitHub Copilot"
-authors:
-  - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-10-08
 description: "Build and ship a Space Quiz from an empty folder with guided First Steps workshops for Copilot app, Copilot CLI, and Visual Studio Code."
 tags:
   - workshop
+authors:
+  - GitHub Copilot Learning Hub Team
+lastUpdated: 2026-11-19
 ---
 
 First steps workshops are guided introductions that help you explore GitHub Copilot without requiring an existing application or a detailed development scenario. Each workshop starts small, introduces the product as you use it, and takes you through a complete workflow.
@@ -17,15 +17,15 @@ Every workshop builds the same Space Quiz from an empty folder, so you can pick 
 
 ## Workshops
 
-### [First Steps with GitHub Copilot app][copilot-app]
+### [GitHub Copilot app tour][copilot-app]
 
 Build a colorful Space Quiz from an empty folder and take it through the development loop: create, refine, test, capture project instructions, publish, plan work, implement issues, review and merge a pull request, automate recurring work, and explore a Canvas extension.
 
-### [First Steps with GitHub Copilot CLI][copilot-cli]
+### [GitHub Copilot CLI first steps][copilot-cli]
 
 Learn the terminal-first loop: build and review diffs before Git writes anything, run sessions side by side in worktrees, plan before you edit, manage context, then create, merge, and delegate work without leaving your shell.
 
-### [First Steps with GitHub Copilot in Visual Studio Code][vscode]
+### [Visual Studio Code first steps][vscode]
 
 Use the editor loop: build in a workspace, polish elements from the integrated browser, inspect context, test before Git writes, plan before you edit, and let GitHub tools handle issues, pull requests, and cloud sessions without leaving VS Code.
 

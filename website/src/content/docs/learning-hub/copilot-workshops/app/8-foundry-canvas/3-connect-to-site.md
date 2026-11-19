@@ -1,13 +1,13 @@
 ---
 title: "Connect the agent to the site"
 description: "Integrate the hosted Backer Concierge through a local credential-safe proxy and test the widget end to end."
+prev:
+  link: /copilot-workshops/real-world-development/app/8-foundry-canvas/2-build-and-deploy/
+  label: Build and deploy the agent
+next: { link: /copilot-workshops/real-world-development/app/10-review/, label: Review and next steps }
 authors:
   - GitHub Copilot Learning Hub Team
-lastUpdated: 2026-10-05
-prev:
-  link: /learning-hub/copilot-workshops/app/8-foundry-canvas/2-build-and-deploy/
-  label: Build and deploy the agent
-next: { link: /learning-hub/copilot-workshops/app/10-review/, label: Review and next steps }
+lastUpdated: 2026-11-19
 ---
 
 This final module connects the tested hosted agent from [Build and deploy the agent][previous-module] to the locally running Tailspin Toys website.

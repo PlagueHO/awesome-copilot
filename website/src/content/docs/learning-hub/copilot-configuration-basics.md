@@ -923,6 +923,8 @@ copilot --trust-folder -p "Summarize this repo"   # trust the folder for a one-o
 copilot --disable-client-telemetry                # turn off client telemetry uploads
 ```
 
+To cap spend on a run, set `--max-ai-credits`. The limit applies to the whole session, including subagents, and AI credits used before a resumed session count toward it.
+
 ### The `/config` Sidebar
 
 Run `/config` to open a dedicated sidebar configuration screen inside the CLI, giving you a browsable view of your active settings without leaving the terminal session or hand-editing `config.json`:
@@ -935,6 +937,8 @@ Run `/config` to open a dedicated sidebar configuration screen inside the CLI, g
 
 `/sandbox` supports per-host network allow/deny rules that layer on top of your configured upstream proxy, instead of replacing it. This lets you permit or block specific hosts for sandboxed commands without reconfiguring your whole proxy setup — useful when a sandboxed build or test needs to reach one extra domain (like a package registry mirror) while keeping the rest of your network policy intact.
 
+Host allow and deny rules accept IPv4 and IPv6 CIDR ranges (for example `10.0.0.0/8`) as well as hostnames. On Windows, `sandbox.userPolicy.filesystem.enumeratePaths` in `settings.json` grants enumerate-only access to directories, and the **Sandbox extensions** setting runs extension processes inside the sandbox.
+
 ### Sandbox Session Control
 
 `/sandbox` can keep sandboxing enabled for the current session only, without changing your global setting. Sandboxed commands can use `HTTPS_PROXY` and `HTTP_PROXY` for host-rule traffic when no sandbox proxy is configured, and sandboxed git on github.com can use a `GITHUB_TOKEN` supplied through `credentials.envVars`. When sandboxed commands inherit your host proxy settings, `NO_PROXY` and `ALL_PROXY` are honored too.
@@ -942,6 +946,15 @@ Run `/config` to open a dedicated sidebar configuration screen inside the CLI, g
 ### Assisted Permissions Guidance
 
 Assisted Permissions are available without enabling experimental mode. In Assisted permission mode, the `assistedApprovalInstructions` setting lets you supply your own guidance to the permission judge, so confirmation decisions reflect your team's norms (for example, which commands are always safe to run).
+
+### Session Helpers and Managed Settings
+
+- `/code` opens the current session in VS Code.
+- `/index` manages code indexing, and managed shared `tgrep` indexing is on by default for eligible repositories.
+- `/settings` opens a unified dashboard with global search across settings and local resources, and `copilot config` includes a Fusion tier setting.
+- `COPILOT_SESSION_CWD` is available when launching, and in LSP and local MCP server configs, to refer to the session's working directory.
+- `--host-allow-session-creation` lets remote clients create sessions on a CLI host for a single launch without changing saved settings.
+- Administrators can disable built-in Browser Use with the managed setting `features.browserUse`, and enterprise-managed Shell, Bash, and PowerShell permission rules support regular expressions.
 
 ### Memory and Session Import
 

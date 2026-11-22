@@ -113,6 +113,8 @@ copilot plugin marketplace browse awesome-copilot
 
 Marketplace manifests can point plugins at a subdirectory of a git repository using a `git-subdir` source, and long plugin descriptions are accepted.
 
+Team plugins can also be installed from marketplaces pinned to a specific branch or tag, or located in a repository subfolder.
+
 Or from within an interactive Copilot session:
 
 ```
